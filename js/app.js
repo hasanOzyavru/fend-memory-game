@@ -8,6 +8,7 @@ const cardsIToArray = [...document.querySelectorAll('.card .fa')];
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+let cardsIShuffled = shuffle(cardsIToArray);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
