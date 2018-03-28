@@ -19,6 +19,8 @@ for (let j = 0; j < cardsIShuffled.length; j++) {
     fragment.appendChild(listTag);
 }
 const cardsDeck = document.querySelector('.deck');
+cardsDeck.innerHTML = "";
+cardsDeck.appendChild(fragment);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
