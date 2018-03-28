@@ -9,6 +9,16 @@ const cardsIToArray = [...document.querySelectorAll('.card .fa')];
  *   - add each card's HTML to the page
  */
 let cardsIShuffled = shuffle(cardsIToArray);
+const fragment = document.createDocumentFragment();
+for (let j = 0; j < cardsIShuffled.length; j++) {
+    const iTag = document.createElement('i');
+    iTag.className = cardsIShuffled[j].className;
+    const listTag = document.createElement('li');
+    listTag.className = 'card';
+    listTag.appendChild(iTag);
+    fragment.appendChild(listTag);
+}
+const cardsDeck = document.querySelector('.deck');
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
