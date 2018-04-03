@@ -54,6 +54,7 @@ cardsDeck.addEventListener('click', function(e) {
         // only if there are less than 2 cards shown, then a new card can be shown
         if (arrayOpenCards.length<2) {
             displaySymbol(e.target, 'card open show');
+            arrayOpenCards = addToArray(arrayOpenCards,e.target);
         }
 
     }  
@@ -65,4 +66,15 @@ Class styles are defined in app.css
 */
 function displaySymbol(target,status){
     target.className = status;
+}
+
+/* addToArray function adds the clicked card to the array as long as it has 
+length less than 2. This array can be empty or has 1 or 2 items.
+@param array = list of target elements i tags, clicked
+@param target = clicked element
+@return array = array after item is added
+*/
+function addToArray(array,target) {
+    array.push(target);
+    return array;
 }
