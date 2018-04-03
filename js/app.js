@@ -21,11 +21,10 @@ for (let j = 0; j < cardsIShuffled.length; j++) {
 const cardsDeck = document.querySelector('.deck');
 cardsDeck.innerHTML = "";
 cardsDeck.appendChild(fragment);
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
 
+    var currentIndex = array.length, temporaryValue, randomIndex;
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -37,7 +36,6 @@ function shuffle(array) {
     return array;
 }
 
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -48,3 +46,23 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+let arrayOpenCards = [];
+cardsDeck.addEventListener('click', function(e) {
+
+    // ensure that action is taken when "not shown" cards are clicked
+    if (e.target.classList.contains('card') && e.target.className != 'card open show') {
+        // only if there are less than 2 cards shown, then a new card can be shown
+        if (arrayOpenCards.length<2) {
+            displaySymbol(e.target, 'card open show');
+        }
+
+    }  
+});
+/* displaySymbol function shows the clicked card by changing its classList.
+Class styles are defined in app.css
+@param target = clicked element
+@param status = classList
+*/
+function displaySymbol(target,status){
+    target.className = status;
+}
