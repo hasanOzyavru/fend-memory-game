@@ -63,6 +63,9 @@ cardsDeck.addEventListener('click', function(e) {
             // if the 2 cards have the same i tag info
             if (arrayOpenCards[0].firstChild.className === arrayOpenCards[1].firstChild.className) {
                 arrayOpenCards = cardsMatch (arrayOpenCards);
+            }else {
+                chkIfArrayResetted = false; // wait for array items to be cleared, before new click reaction
+                setTimeout(cardsDoNotMatch, 1000); // let player to see cards for 1 sec with reacting to new click 
             }
 
         }
@@ -99,4 +102,16 @@ function cardsMatch(array) {
     array[1].className = "card match";
     array = [];
     return array;
+}
+
+/* cardsDoNotMatch function keeps 2 not similar cards open for 1 sec and then the symbols
+are hidden, but cards stay in open status.
+no parameter is given because it is in setTimeOut function instead arrayOpenCards scope is
+kept global.
+*/
+function cardsDoNotMatch () {
+    arrayOpenCards[0].className = "card open"; // to show card was open at least once
+    arrayOpenCards[1].className = "card open";
+    arrayOpenCards = [];
+    chkIfArrayResetted = true; // emptying the array, it is OK to accept new click
 }
