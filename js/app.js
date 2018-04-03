@@ -46,7 +46,9 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-let arrayOpenCards = [];
+let arrayOpenCards = []; //items of the array are clicked elements, length is 0,1 or 2
+let chkIfArrayResetted = true; //set it to false to prevent reaction to the clicks prior to array reset
+
 cardsDeck.addEventListener('click', function(e) {
 
     // ensure that action is taken when "not shown" cards are clicked
@@ -55,6 +57,14 @@ cardsDeck.addEventListener('click', function(e) {
         if (arrayOpenCards.length<2) {
             displaySymbol(e.target, 'card open show');
             arrayOpenCards = addToArray(arrayOpenCards,e.target);
+        }
+        // when 2 items in the array and while no more clicks are accepted
+        if (arrayOpenCards.length===2 && chkIfArrayResetted) {
+            // if the 2 cards have the same i tag info
+            if (arrayOpenCards[0].firstChild.className === arrayOpenCards[1].firstChild.className) {
+                arrayOpenCards = cardsMatch (arrayOpenCards);
+            }
+
         }
 
     }  
@@ -76,5 +86,17 @@ length less than 2. This array can be empty or has 1 or 2 items.
 */
 function addToArray(array,target) {
     array.push(target);
+    return array;
+}
+
+/* cardsMatch function locks the 2 same cards in match position
+empty and return the array.
+@param array = array with 2 similar cards
+@return array = empty array
+*/
+function cardsMatch(array) {
+    array[0].className = "card match";
+    array[1].className = "card match";
+    array = [];
     return array;
 }
