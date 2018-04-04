@@ -48,7 +48,9 @@ function shuffle(array) {
  */
 let arrayOpenCards = []; //items of the array are clicked elements, length is 0,1 or 2
 let chkIfArrayResetted = true; //set it to false to prevent reaction to the clicks prior to array reset
-
+let numberOfMoves = 0; // every turn that 2 cards shown is considered as 1 move
+const scoreMoveDisplay = document.querySelector('.moves'); // move counter is displayed in '.moves' class
+scoreMoveDisplay.textContent = numberOfMoves; // initially displays 0;
 cardsDeck.addEventListener('click', function(e) {
 
     // ensure that action is taken when "not shown" cards are clicked
@@ -60,6 +62,7 @@ cardsDeck.addEventListener('click', function(e) {
         }
         // when 2 items in the array and while no more clicks are accepted
         if (arrayOpenCards.length===2 && chkIfArrayResetted) {
+            numberOfMoves = scoreMove(numberOfMoves); // increment and display the number of moves
             // if the 2 cards have the same i tag info
             if (arrayOpenCards[0].firstChild.className === arrayOpenCards[1].firstChild.className) {
                 arrayOpenCards = cardsMatch (arrayOpenCards);
@@ -114,4 +117,14 @@ function cardsDoNotMatch () {
     arrayOpenCards[1].className = "card open";
     arrayOpenCards = [];
     chkIfArrayResetted = true; // emptying the array, it is OK to accept new click
+}
+
+/* scoreMove function gets and increments the number of moves. Update the display
+@param number = initial number of move
+@return number = number of move incremented by 1
+*/
+function scoreMove(number) {
+    number += 1;
+    scoreMoveDisplay.textContent = number;
+    return number;
 }
