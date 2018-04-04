@@ -63,9 +63,12 @@ function clockFunction () {
     timerD += 0.1;
     timeDisplay.textContent = '   ' + timerD.toFixed(1) + ' secs.';    
 }
-const star1 = 8; //after 20 moves, only one star left
-const star2 = 4; //after 15 moves, 2 stars left
+const star1 = 18; //after 20 moves, only one star left
+const star2 = 12; //after 15 moves, 2 stars left
 const star = document.querySelector('.stars');
+
+const endOfGame = 8; // 8 pair match is the end of the game
+const needConcentration = 24; //24 move or more requires more concentration
 
 // Event listener for card click
 cardsDeck.addEventListener('click', function(e) {
@@ -94,13 +97,16 @@ cardsDeck.addEventListener('click', function(e) {
             if (arrayOpenCards[0].firstChild.className === arrayOpenCards[1].firstChild.className) {
                 arrayOpenCards = cardsMatch (arrayOpenCards);
                 successCounter += 1;
-                if (successCounter === 8) {
+                if (successCounter === endOfGame) {
                     endTime = performance.now();
                     clearInterval(timeStarts);
                     timeDisplay.textContent ='';
                     let timeDuration = (endTime - startTime)/1000;
                     timeDuration = timeDuration.toFixed(1);
                     displayResult (numberOfMoves,timeDuration,star.children.length);
+                    const inviteAgain = document.querySelector('.invite');
+                    inviteAgain.textContent = 'Want to play again =>';
+                    inviteAgain.className = 'invite-visible';
                 }
             }else {
                 chkIfArrayResetted = false; // wait for array items to be cleared, before new click reaction
@@ -171,7 +177,7 @@ function scoreMove(number) {
 function displayResult(numberOfMoves, time, numberOfStars) {
     const declareResult = document.querySelector('.result');
     declareResult.className = 'result animation-result';
-    if (numberOfMoves < 24) {
+    if (numberOfMoves < needConcentration) {
         declareResult.textContent = `CONGRATULATIONS! 
 	    COMPLETED IN ${numberOfMoves} MOVES FOR ${time} SECONDS.  
 	    RESULT : ${numberOfStars} STARS`;

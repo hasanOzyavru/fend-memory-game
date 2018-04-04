@@ -130,3 +130,23 @@ h1 {
     from { font-size: small;}
     to { font-size: large;}
 }
+
+.invite {
+    font-family: 'Open Sans', sans-serif;
+    color: #800;
+    display: inline-block;   
+}
+
+.invite-visible {
+    color: #800;
+    font-size: medium;
+    position: relative;
+    animation-name: inviteAnimation;
+    animation-duration: 1s; 
+    animation-iteration-count: infinite;
+}
+
+@keyframes inviteAnimation {
+    from {left: 2em;}
+    to {left: 4em;}
+}
