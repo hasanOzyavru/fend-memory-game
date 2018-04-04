@@ -185,3 +185,8 @@ function displayResult(numberOfMoves, time, numberOfStars) {
 	declareResult.textContent = `YOU CAN DO BETTER WITH MORE CONCENTRATION`; 	
     }
 }
+
+const restartGame = document.querySelector('.restart');
+restartGame.addEventListener('click', function(){
+    document.location.href = "";
+});

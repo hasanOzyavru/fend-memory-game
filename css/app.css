@@ -147,6 +147,6 @@ h1 {
 }
 
 @keyframes inviteAnimation {
-    from {left: 2em;}
-    to {left: 4em;}
+    from {left: 1em;}
+    to {left: 3em;}
 }
