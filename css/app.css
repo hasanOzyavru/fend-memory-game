@@ -31,6 +31,7 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    text-align: center;
 }
 
 /*
@@ -106,4 +107,26 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.duration {
+    font-family: 'Open Sans', sans-serif;
+    color: #800;
+    display: inline-block;
+}
+
+.result {
+    font-family: 'Open Sans', sans-serif;
+    color: #088;
+    text-align: center;
+}
+
+.animation-result {
+    animation-name: resultDisplay;
+    animation-duration: 4s;
+}
+
+@keyframes resultDisplay {
+    from { font-size: small;}
+    to { font-size: large;}
 }

@@ -51,10 +51,29 @@ let chkIfArrayResetted = true; //set it to false to prevent reaction to the clic
 let numberOfMoves = 0; // every turn that 2 cards shown is considered as 1 move
 const scoreMoveDisplay = document.querySelector('.moves'); // move counter is displayed in '.moves' class
 scoreMoveDisplay.textContent = numberOfMoves; // initially displays 0;
+let successCounter = 0; // target is to find 8 pairs.
+let startTime = 0; // the parameters are for calculating total duration to win.
+let endTime = 0;
+let firstClick = true; // startTime is calculated based on firstClick and timer starts.
+let timeStarts; // used as interval timer to display running time
+let timerD = 0;
+// Display the running time
+const timeDisplay = document.querySelector('.duration');
+function clockFunction () {
+    timerD += 0.1;
+    timeDisplay.textContent = '   ' + timerD.toFixed(1) + ' secs.';    
+}
+// Event listener for card click
 cardsDeck.addEventListener('click', function(e) {
 
     // ensure that action is taken when "not shown" cards are clicked
     if (e.target.classList.contains('card') && e.target.className != 'card open show') {
+        // time starts at first click and not reinitialized again by means of this block
+        if (firstClick) {
+            startTime = performance.now(); // duration start to be used in calculation for duration
+            timeStarts = setInterval(clockFunction,100); // time display with 0.1 sec intervals
+            firstClick = false; // Only at first click this block runs
+        }
         // only if there are less than 2 cards shown, then a new card can be shown
         if (arrayOpenCards.length<2) {
             displaySymbol(e.target, 'card open show');
@@ -66,6 +85,15 @@ cardsDeck.addEventListener('click', function(e) {
             // if the 2 cards have the same i tag info
             if (arrayOpenCards[0].firstChild.className === arrayOpenCards[1].firstChild.className) {
                 arrayOpenCards = cardsMatch (arrayOpenCards);
+                successCounter += 1;
+                if (successCounter === 8) {
+                    endTime = performance.now();
+                    clearInterval(timeStarts);
+                    timeDisplay.textContent ='';
+                    let timeDuration = (endTime - startTime)/1000;
+                    timeDuration = timeDuration.toFixed(1);
+                    displayResult (numberOfMoves,timeDuration);
+                }
             }else {
                 chkIfArrayResetted = false; // wait for array items to be cleared, before new click reaction
                 setTimeout(cardsDoNotMatch, 1000); // let player to see cards for 1 sec with reacting to new click 
@@ -127,4 +155,19 @@ function scoreMove(number) {
     number += 1;
     scoreMoveDisplay.textContent = number;
     return number;
+}
+/* displayResult shows the result of the game when completed
+@param numberOfMoves = total number of moves during the game
+@param time = time elapsed during the game
+*/
+function displayResult(numberOfMoves, time) {
+    const declareResult = document.querySelector('.result');
+    declareResult.className = 'result animation-result';
+    if (numberOfMoves < 24) {
+        declareResult.textContent = `CONGRATULATIONS! 
+	    COMPLETED IN ${numberOfMoves} MOVES FOR ${time} SECONDS.`  
+//	    RESULT : ${numberOfStars} STARS`;
+	}else{
+	declareResult.textContent = `YOU CAN DO BETTER WITH MORE CONCENTRATION`; 	
+    }
 }
