@@ -63,6 +63,10 @@ function clockFunction () {
     timerD += 0.1;
     timeDisplay.textContent = '   ' + timerD.toFixed(1) + ' secs.';    
 }
+const star1 = 8; //after 20 moves, only one star left
+const star2 = 4; //after 15 moves, 2 stars left
+const star = document.querySelector('.stars');
+
 // Event listener for card click
 cardsDeck.addEventListener('click', function(e) {
 
@@ -82,6 +86,10 @@ cardsDeck.addEventListener('click', function(e) {
         // when 2 items in the array and while no more clicks are accepted
         if (arrayOpenCards.length===2 && chkIfArrayResetted) {
             numberOfMoves = scoreMove(numberOfMoves); // increment and display the number of moves
+            // depending on number of moves star rating decreases
+            if (numberOfMoves === star2 || numberOfMoves === star1) {
+                star.removeChild(star.firstElementChild);
+            }
             // if the 2 cards have the same i tag info
             if (arrayOpenCards[0].firstChild.className === arrayOpenCards[1].firstChild.className) {
                 arrayOpenCards = cardsMatch (arrayOpenCards);
@@ -92,7 +100,7 @@ cardsDeck.addEventListener('click', function(e) {
                     timeDisplay.textContent ='';
                     let timeDuration = (endTime - startTime)/1000;
                     timeDuration = timeDuration.toFixed(1);
-                    displayResult (numberOfMoves,timeDuration);
+                    displayResult (numberOfMoves,timeDuration,star.children.length);
                 }
             }else {
                 chkIfArrayResetted = false; // wait for array items to be cleared, before new click reaction
@@ -160,13 +168,13 @@ function scoreMove(number) {
 @param numberOfMoves = total number of moves during the game
 @param time = time elapsed during the game
 */
-function displayResult(numberOfMoves, time) {
+function displayResult(numberOfMoves, time, numberOfStars) {
     const declareResult = document.querySelector('.result');
     declareResult.className = 'result animation-result';
     if (numberOfMoves < 24) {
         declareResult.textContent = `CONGRATULATIONS! 
-	    COMPLETED IN ${numberOfMoves} MOVES FOR ${time} SECONDS.`  
-//	    RESULT : ${numberOfStars} STARS`;
+	    COMPLETED IN ${numberOfMoves} MOVES FOR ${time} SECONDS.  
+	    RESULT : ${numberOfStars} STARS`;
 	}else{
 	declareResult.textContent = `YOU CAN DO BETTER WITH MORE CONCENTRATION`; 	
     }
