@@ -19,7 +19,7 @@ for (let j = 0; j < cardsIShuffled.length; j++) {
     fragment.appendChild(listTag);
 }
 const cardsDeck = document.querySelector('.deck');
-cardsDeck.innerHTML = "";
+cardsDeck.innerHTML = '';
 cardsDeck.appendChild(fragment);
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -143,8 +143,8 @@ empty and return the array.
 @return array = empty array
 */
 function cardsMatch(array) {
-    array[0].className = "card match";
-    array[1].className = "card match";
+    array[0].className = 'card match';
+    array[1].className = 'card match';
     array = [];
     return array;
 }
@@ -155,8 +155,8 @@ no parameter is given because it is in setTimeOut function instead arrayOpenCard
 kept global.
 */
 function cardsDoNotMatch () {
-    arrayOpenCards[0].className = "card open"; // to show card was open at least once
-    arrayOpenCards[1].className = "card open";
+    arrayOpenCards[0].className = 'card open'; // to show card was open at least once
+    arrayOpenCards[1].className = 'card open';
     arrayOpenCards = [];
     chkIfArrayResetted = true; // emptying the array, it is OK to accept new click
 }
@@ -188,5 +188,5 @@ function displayResult(numberOfMoves, time, numberOfStars) {
 
 const restartGame = document.querySelector('.restart');
 restartGame.addEventListener('click', function(){
-    document.location.href = "";
+    document.location.href = '';
 });
