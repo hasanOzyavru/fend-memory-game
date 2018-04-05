@@ -119,16 +119,7 @@ h1 {
     font-family: 'Open Sans', sans-serif;
     color: #088;
     text-align: center;
-}
-
-.animation-result {
-    animation-name: resultDisplay;
-    animation-duration: 4s;
-}
-
-@keyframes resultDisplay {
-    from { font-size: small;}
-    to { font-size: large;}
+    font-size: medium;
 }
 
 .invite {
@@ -149,4 +140,59 @@ h1 {
 @keyframes inviteAnimation {
     from {left: 1em;}
     to {left: 3em;}
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    bottom: 200px;
+    z-index: 1;
+    width: 660px;
+    height: 50%;
+    overflow: auto;
+    background-color: rgb(150, 200, 250);
+    background-color: rgba(150,200,250,0.4);
+}
+.modal.show {
+    display: block;
+    animation-name: modalShow;
+    animation-duration: 3s;
+}
+
+@keyframes modalShow {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.modal-content {
+    background-color: rgb(98, 124, 98);
+    margin: 5% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.modal-buttons {
+    background-color: rgba(150,200,250,0.4);
+    
+}
+.yes {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Times New Roman', sans-serif;
+    color: blue;
+    width: 4em;
+    animation-name: yesPlease;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+@keyframes yesPlease {
+    from {color: greenyellow;}
+    to {color: blueviolet;}
+}
+
+.no {
+    font-size: 28px;
+    font-family: 'Times New Roman', sans-serif;
+    width: 4em;
 }

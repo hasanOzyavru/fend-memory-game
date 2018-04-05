@@ -104,9 +104,7 @@ cardsDeck.addEventListener('click', function(e) {
                     let timeDuration = (endTime - startTime)/1000;
                     timeDuration = timeDuration.toFixed(1);
                     displayResult (numberOfMoves,timeDuration,star.children.length);
-                    const inviteAgain = document.querySelector('.invite');
-                    inviteAgain.textContent = 'Want to play again =>';
-                    inviteAgain.className = 'invite-visible';
+                    displayModal(numberOfMoves,timeDuration,star.children.length);
                 }
             }else {
                 chkIfArrayResetted = false; // wait for array items to be cleared, before new click reaction
@@ -176,7 +174,6 @@ function scoreMove(number) {
 */
 function displayResult(numberOfMoves, time, numberOfStars) {
     const declareResult = document.querySelector('.result');
-    declareResult.className = 'result animation-result';
     if (numberOfMoves < needConcentration) {
         declareResult.textContent = `CONGRATULATIONS! 
 	    COMPLETED IN ${numberOfMoves} MOVES FOR ${time} SECONDS.  
@@ -189,4 +186,26 @@ function displayResult(numberOfMoves, time, numberOfStars) {
 const restartGame = document.querySelector('.restart');
 restartGame.addEventListener('click', function(){
     document.location.href = '';
+});
+
+function displayModal(numberOfMoves, time, numberOfStars){
+    const scoreModal = document.querySelector('.score-modal');
+    scoreModal.textContent= `CONGRATULATIONS! 
+    COMPLETED IN ${numberOfMoves} MOVES FOR ${time} SECONDS.  
+    RESULT : ${numberOfStars} STARS`;
+    const modal = document.querySelector('.modal');
+    modal.className = 'modal show';
+}
+const yesReStartGame = document.querySelector('.yes');
+yesReStartGame.addEventListener('click', function(){
+    document.location.href = '';
+});
+
+const noReStartGame = document.querySelector('.no');
+noReStartGame.addEventListener('click', function(){
+    const modal = document.querySelector('.modal');
+    modal.className = 'modal';
+    const inviteAgain = document.querySelector('.invite');
+    inviteAgain.textContent = 'Want to play again =>';
+    inviteAgain.className = 'invite-visible';
 });
