@@ -1,6 +1,31 @@
+#MEMORYGAME
+
+##Reason
+
 This game is a project #3 of Front End Web Developer Nanodegree program by Udacity
 
-For player:
+##Licence
+
+Open source and open distribution
+
+##How to install
+
+git clone
+
+##Files
+
+index.html
+app.css
+
+##How to play
+Zero
+
+Starts
+
+Finishes
+
+#Current work
+
 
 Try to match 2 cards by memorizing the positions.
 If matched cards stay in "show" position
